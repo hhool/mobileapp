@@ -2,6 +2,21 @@
 <html manifest="offline.appcache">
   <head>
     <meta charset="UTF-8" />
+    <script>
+      (function () {
+        try {
+          var p = location.pathname || '/';
+          // skip if already ends with slash or looks like a file with an extension
+          if (p.charAt(p.length - 1) !== '/' && !/\.[^\/]+$/.test(p)) {
+            var origin = location.origin || (location.protocol + '//' + location.host);
+            var newUrl = origin + p + '/' + (location.search || '') + (location.hash || '');
+            location.replace(newUrl);
+          }
+        } catch (e) {
+          /* ignore */
+        }
+      })();
+    </script>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <title>Bouncing Dot - Play Free HTML5 Games Online | poki2.online</title>
     <meta
